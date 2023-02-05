@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Discussion Page For Students</h1>
+    <form action=""  name="submit-to-google-sheet" method="post">
+        <label for="">Name</label>
+        <input type="text" name ="name">
+        <br><br>
+        <label for="">Message</label>
+        <textarea name="message" id="" cols="30" rows="10">
+
+        </textarea>
+        <br><br>
+        <input type="submit" value="submit" name="submit">
+        <span id = "success"></span>
+    </form>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxq4Cm4ENZiyY8jgEJkTw_x0bp-t-EEpoYrP-DqlAkoMjHW8sGM6VstV2gfLMcZ8Bum4Q/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const success = document.getElementById('success');
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                success.innerHTML = "Data successfully Submit";
+
+                setTimeout(function()
+                {
+                   success.innerHTML = ""; 
+                }, 5000)
+                form.reset();
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
+
+
+</body>
+</html>
