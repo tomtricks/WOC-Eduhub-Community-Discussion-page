@@ -5,20 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <h1>Discussion Page For Students</h1>
-    <form action=""  name="submit-to-google-sheet" method="post">
-        <label for="">Name</label>
-        <input type="text" name ="name">
-        <br><br>
-        <label for="">Message</label>
-        <textarea name="message" id="" cols="30" rows="10">
+    <div class="container">
+    <script>
+        fetch('https://script.google.com/macros/s/AKfycbxHhG3FEHorAfWfkAMM0jXknmPTspoZz4Zq8yB9pLCXM1m4-S-6XBRaVW4UQw_f5_LFCQ/exec')
+        .then(res => res.json())
+        .then(data => {
+            let tr = data.content.reduce((prev,cur) =>
+            {
+                let td = cur.map(e => `<td>${e}<hr></td>`)
+                return prev + `<tr>${td.join("")}</tr>`
+            },"\r")
+            document.querySelector("table").innerHTML = tr;
+        });
+    </script>
+    <h1 class="text-center">Discussion Page For Students</h1>
+    <hr class="text-center">
+<table>
 
-        </textarea>
+</table>
+<div class="form-floating">
+    <form action=""  name="submit-to-google-sheet" method="post">
+        <!-- <label for="">Name</label>
+        <input type="text" name ="name"> -->
         <br><br>
-        <input type="submit" value="submit" name="submit">
-        <span id = "success"></span>
+        <label for="" class="mb-3">Have Ideas to Discuss, Write here!</label><br>
+        <textarea class = "form-control" placeholder="Leave Your doubts here!, Lets discuss" name="message" rows="10" id="floatingTextarea2" style="height: 100px" ></textarea>
+        <br><br>
+        <input type="submit"  class="btn btn-primary" value="submit" name="submit">
+        
+
+           
+        <span id = "success" class="">
+        </span>
     </form>
 
     <script>
@@ -41,6 +63,9 @@
         })
       </script>
 
+</div>
 
+</div> 
 </body>
+<script src="script.js"></script>
 </html>
